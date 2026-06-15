@@ -63,3 +63,8 @@ scp -i ~/.ssh/my_key.pem file.txt username@remote_ip:/remote/dir/
 ```bash
 sudo apt update && sudo apt install openssh-server -y
 ```
+Enable ssh and check status [It should be active (running)]
+```bash
+sudo systemctl enable ssh
+sudo systemctl status ssh
+```
