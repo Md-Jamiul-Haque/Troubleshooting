@@ -1,6 +1,6 @@
-# Runbook: Expanding Linux Guest Disk Partitions Live
+# Expanding Linux Guest Disk Partitions Live
 This document outlines the steps to repartition and expand a filesystem inside a Linux guest OS after the underlying virtual disk (VMDK, EBS volume, etc.) has been expanded 
-at the hypervisor or cloud provider level.
+at the hypervisor.
 
 
 The utility growpart must be installed (packaged under cloud-utils on Ubuntu/Debian or cloud-utils-growpart on RHEL/CentOS).
@@ -21,11 +21,12 @@ sudo df -Th
 ## Step 2: Expand the Partition Container
 Use growpart to expand the partition table to the end of the newly allocated physical disk space. This process safely modifies the partition table live without affecting data.
 
-Syntax: sudo growpart /dev/<disk_name> <partition_number>
+Syntax: `sudo growpart /dev/<disk_name> <partition_number>`
 ```bash
 sudo growpart /dev/sda 2
 ```
-Note the space between the disk name and the partition number.
+>Note: the space between the disk name and the partition number.
+
 
 Verify the partition container grew successfully:
 
