@@ -1,4 +1,4 @@
-# Fixing SSH issues on cloned Ubuntu VMs
+# Fixing SSH issues on  Ubuntu
 
 If you can't SSH into an Ubuntu machine and it shows a "Connection reset by peer" error - it’s likely because the SSH server configuration was wiped out or corrupted. 
 
