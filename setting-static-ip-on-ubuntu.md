@@ -22,6 +22,9 @@ Netplan configuration files live in the `/etc/netplan/` directory. List them usi
 ls /etc/netplan/
 ```
 You’ll usually see a file named something like `00-installer-config.yaml` or `50-cloud-init.yaml`.
+> ⚠️ **Note on NetworkManager vs. networkd:**
+> Ubuntu Server defaults to `networkd`, while Ubuntu Desktop uses `NetworkManager`. If you see `renderer: NetworkManager` or a file named `01-network-manager-all.yaml`, your system is letting the desktop GUI handle the network.
+> If you are setting up a headless server and want to completely hand over control to Netplan and `networkd`, you need to disable NetworkManager so they don't fight over your network card.
 
 ### Step 3: Edit the YAML Configuration
 Open the file with nano (or your preferred editor):
@@ -69,3 +72,22 @@ ip r
 ```
 
 You are all set! Your Ubuntu machine now has a permanent, static IP address on your network.
+
+### How to Switch from NetworkManager to networkd
+
+**1. Stop and disable the NetworkManager service:**
+```bash
+sudo systemctl stop NetworkManager
+sudo systemctl disable NetworkManager
+```
+**2. Ensure networkd is enabled and running:**
+
+```bash
+sudo systemctl enable systemd-networkd
+sudo systemctl start systemd-networkd
+```
+**3. Update your Netplan file:**
+
+Make sure your `/etc/netplan/*.yaml` file explicitly sets the renderer to networkd (as shown in the configuration above) instead of NetworkManager.
+
+Once you run `sudo netplan apply`, networkd will take full control of your static IP.
