@@ -49,4 +49,4 @@ If issue persists, then run the following command
 ```bash
 bcdedit /set hypervisorlaunchtype auto
 ```
-Now retsart your computer. It should work now.
+Now retsart your computer and run the ubuntu installation command again. It should work now.
